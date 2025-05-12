@@ -1,0 +1,95 @@
+
+
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver; 
+
+public class StepDefinition1
+{
+	@Before
+	public void beforeHooksDBConnection()
+	{
+		System.out.println("Code for connection with DB");
+	}
+	
+	@After
+	public void afterHooksDBConnection()
+	{
+		System.out.println("Code for disconnecting with DB");
+	}
+	
+	@Before("@test1")
+	public void beforeTest1()
+	{
+		System.out.println("Before Test1 scenario");
+	}
+	
+	@After("@test2")
+	public void afterTest1()
+	{
+		System.out.println("After Test2 scenario");
+	}
+	
+	@Given("user opens the browser and enters the url and hits enter")
+	public void user_opens_the_browser_and_enters_the_url_and_hits_enter() 
+	{
+		System.out.println("user entered url and hits enter");
+	}
+
+	@Given("user enters username in {string} field")
+	public void user_enters_username_in_field(String string) 
+	{
+		System.out.println("user entered username");
+	}
+
+	@Given("user enters password in {string} field")
+	public void user_enters_password_in_field(String string) 
+	{
+		System.out.println("user entered password");
+	}
+
+	@When("user clicks on submit button")
+	public void user_clicks_on_submit_button() 
+	{
+		System.out.println("user clicks on submit button");
+	}
+
+	@Then("user will be able to get to homepage of the application")
+	public void user_will_be_able_to_get_to_homepage_of_the_application() 
+	{
+		System.out.println("user able to visit homepage of the application");
+	}
+	@Then("user will get invalid username as error message")
+	public void user_will_get_invalid_username_as_error_message() 
+	{
+	    System.out.println("Username is invalid");
+	}
+	
+	
+	@Given("user opens the demo website of Grotechminds")
+	public void user_opens_the_demo_website_of_grotechminds() 
+	{
+	    System.out.println("Application Opened");
+	}
+
+	@Given("user enters the below details")
+	public void user_enters_the_below_details(io.cucumber.datatable.DataTable userCredentials)
+	{
+	 WebDriver driver=new ChromeDriver();
+	 driver.get("https://demo.automationtesting.in/Register.html");
+	 driver.manage().window().maximize();
+	 List<List<String>> data=userCredentials.asLists(String.class);
+	 driver.findElement(By.xpath("(//input[@placeholder='First Name'])[1]")).sendKeys(data.get(1).get(0));
+	 driver.findElement(By.xpath("(//input[@placeholder='Last Name'])[1]")).sendKeys(data.get(1).get(1));
+	}
+
+
+}
